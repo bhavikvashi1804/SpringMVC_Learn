@@ -24,11 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	// show the login page
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/login", "/h2-console/**").permitAll().antMatchers("/", "/*todo*/**")
+		http.authorizeRequests().antMatchers("/login").permitAll().antMatchers("/", "/*todo*/**")
 				.access("hasRole('USER')").and().formLogin();
-
-		http.csrf().disable();
-		http.headers().frameOptions().disable();
 	}
 
 }

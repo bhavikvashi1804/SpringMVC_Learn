@@ -32,7 +32,8 @@ public class TodoController {
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(
+				dateFormat, false));
 	}
 
 	@RequestMapping(value = "/list-todos", method = RequestMethod.GET)
@@ -54,13 +55,15 @@ public class TodoController {
 		if (result.hasErrors())
 			return "todo";
 
-		service.addTodo(getLoggedInUserName(), todo.getDesc(), todo.getTargetDate(), false);
+		service.addTodo(getLoggedInUserName(), todo.getDesc(),
+				todo.getTargetDate(), false);
 		model.clear();// to prevent request parameter "name" to be passed
 		return "redirect:/list-todos";
 	}
 
 	private String getLoggedInUserName() {
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Object principal = SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
 
 		if (principal instanceof UserDetails)
 			return ((UserDetails) principal).getUsername();
@@ -75,7 +78,8 @@ public class TodoController {
 	}
 
 	@RequestMapping(value = "/update-todo", method = RequestMethod.POST)
-	public String updateTodo(ModelMap model, @Valid Todo todo, BindingResult result) {
+	public String updateTodo(ModelMap model, @Valid Todo todo,
+			BindingResult result) {
 		if (result.hasErrors())
 			return "todo";
 

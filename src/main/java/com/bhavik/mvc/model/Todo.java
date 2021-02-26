@@ -1,20 +1,25 @@
 package com.bhavik.mvc.model;
-
 import java.util.Date;
 
-public class Todo {
+import javax.validation.constraints.Size;
 
+public class Todo {
 	private int id;
+
 	private String user;
+
+	@Size(min = 10, message = "Enter atleast 10 Characters.")
 	private String desc;
+
 	private Date targetDate;
 	private boolean isDone;
 
 	public Todo() {
-
+		super();
 	}
 
-	public Todo(int id, String user, String desc, Date targetDate, boolean isDone) {
+	public Todo(int id, String user, String desc, Date targetDate,
+			boolean isDone) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -73,26 +78,23 @@ public class Todo {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (obj == null) {
+		if (obj == null)
 			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
 		Todo other = (Todo) obj;
-		if (id != other.id) {
+		if (id != other.id)
 			return false;
-		}
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Todo [id=%s, user=%s, desc=%s, targetDate=%s, isDone=%s]", id, user, desc, targetDate,
-				isDone);
+		return String.format(
+				"Todo [id=%s, user=%s, desc=%s, targetDate=%s, isDone=%s]", id,
+				user, desc, targetDate, isDone);
 	}
 
 }
